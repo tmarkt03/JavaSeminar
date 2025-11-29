@@ -7,5 +7,10 @@
 <body>
 <div th:insert="menu"></div>
 <h1>Contact:</h1>
+<form action="#" th:action="@{/exercise2}" th:object="${attr1}" method="post">
+    <p>Id: <input type="text" th:field="*{id}" /></p>
+    <p>Message: <input type="text" th:field="*{content}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
 </body>
 </html>

@@ -97,4 +97,17 @@ public class HomeController {
         emplRepo.delete(emplRepo.findById(id).get());
         return "redirect:/";
     }
+
+
+    @GetMapping("/contact")
+    public String formCreate(Model model) {	// Model model: Dependency injection
+        model.addAttribute("attr1", new MessageClass());
+        return "contact";
+    }
+    @PostMapping("/")
+    // MessageClass messageClass and Model model: Dependency injection
+    public String formSubmit(@ModelAttribute MessageClass messageClass, Model model) {
+        model.addAttribute("attr2", messageClass);
+        return "redirect:/";
+    }
 }
