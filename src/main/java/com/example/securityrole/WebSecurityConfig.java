@@ -33,8 +33,10 @@ public class WebSecurityConfig {
                         auth -> auth
                                 .requestMatchers("/","/passwordtest").anonymous()
                                 .requestMatchers("/resources/**", "/","/home").authenticated()
+                                .requestMatchers("/resources/**", "/","/messages").authenticated()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers ("/resources/**", "/", "/register", "/register_process").anonymous()
+                                .requestMatchers ("/resources/**", "/", "/contact").anonymous()
                 )
                 .formLogin(
                         form -> form

@@ -16,6 +16,10 @@ public class HomeController {
     public String home() {
         return "index";
     }
+    @GetMapping("/messages")
+    public String message() {return "messages";}
+    @GetMapping("/contact")
+    public String contact() {return "contact";}
     @GetMapping("/home")
     public String user(Model model) {
         return "user";
