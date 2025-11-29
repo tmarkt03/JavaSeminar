@@ -1,0 +1,5 @@
+package com.example.assignment;
+import org.springframework.data.repository.CrudRepository;
+interface PersonRepository extends CrudRepository<Person, Long> {
+}
+
