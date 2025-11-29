@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Login, Register</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div th:insert="menu"></div>
+<h3> Register if you are not yet a user!</h3>
+<form action="#" th:action="@{/register_process}" th:object="${reg}" method="post">
+    <fieldset>
+        <legend>Registration</legend>
+        <p><input type="text" th:field="*{name}" placeholder="Name" required/></p>
+        <p><input type="text" th:field="*{email}" placeholder="Email" required/></p>
+        <p><input type="password" th:field="*{password}" placeholder="Password" required/></p>
+        <p><input type="submit" value="Registration" /></p>
+    </fieldset>
+</form>
+</body>
+</html>
