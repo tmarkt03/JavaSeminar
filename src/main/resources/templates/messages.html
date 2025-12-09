@@ -7,8 +7,8 @@
 <body>
 <div th:insert="menu"></div>
 <h1>Messages:</h1>
-<p th:text="'id: ' + ${attr2.id}" />
-<p th:text="'content: ' + ${attr2.content}" />
+<p th:text="'id: ' + ${messageClass.id}" />
+<p th:text="'content: ' + ${messageClass.content}" />
 <a href="/messages">Submit another message</a>
 </body>
 </html>

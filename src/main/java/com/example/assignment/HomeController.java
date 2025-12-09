@@ -17,8 +17,6 @@ public class HomeController {
     }
     @GetMapping("/messages")
     public String message() {return "messages";}
-    @GetMapping("/contact")
-    public String contact() {return "contact";}
     @GetMapping("/home")
     public String user(Model model) {
         return "user";
@@ -49,65 +47,5 @@ public class HomeController {
         userRepo.save(user);
         model.addAttribute("id", user.getId());
         return "reggood";
-    }
-
-    @Autowired private EmplRepo emplRepo;	// Dependency injection
-
-    @GetMapping("/user.html")
-    public String MainPage(Model model, String message) {
-        model.addAttribute("employees", emplRepo.findAll());
-        model.addAttribute("message", model.getAttribute("message"));
-        return "user";
-    }
-
-    @GetMapping("/new")
-    public String newEmployeePage(Model model) {
-        model.addAttribute("employee", new Employee());
-        return "newemployee";
-    }
-
-    @PostMapping(value = "/save")
-    public String saveEmployee(@ModelAttribute Employee employee, RedirectAttributes redirAttr) {
-        for(Employee employee2: emplRepo.findAll())
-            if(employee2.getName().equals(employee.getName()) && employee2.getAddress().equals(employee.getAddress())){
-                redirAttr.addFlashAttribute("message","There is already an employee with this name and address. ID="+employee2.getId());
-                return "redirect:/";
-            }
-        emplRepo.save(employee);
-        redirAttr.addFlashAttribute("message","A new employee has been added! ID="+employee.getId());
-        return "redirect:/";
-    }
-
-    @GetMapping("/edit/{id}")
-    public String updateEmployee(@PathVariable(name = "id") int id, Model model) {
-        model.addAttribute("employee", emplRepo.findById(id));
-        return "update";
-    }
-
-    @PostMapping(value = "/update")
-    public String updateEmployee(@ModelAttribute Employee employee, RedirectAttributes redirAttr) {
-        emplRepo.save(employee);
-        redirAttr.addFlashAttribute("message","Employee is updated! ID="+employee.getId());
-        return "redirect:/";
-    }
-
-    @GetMapping("/delete/{id}")
-    public String deleteEmployee(@PathVariable(name = "id") int id, RedirectAttributes redirAttr) {
-        redirAttr.addFlashAttribute("message","Employee is deleted! ID="+ emplRepo.findById(id).get().getId());
-        emplRepo.delete(emplRepo.findById(id).get());
-        return "redirect:/";
-    }
-
-
-    @GetMapping("/contact")
-    public String formCreate(Model model) {	// Model model: Dependency injection
-        model.addAttribute("attr1", new MessageClass());
-        return "contact";
-    }
-    @PostMapping("/")
-    // MessageClass messageClass and Model model: Dependency injection
-    public String formSubmit(@ModelAttribute MessageClass messageClass, Model model) {
-        model.addAttribute("attr2", messageClass);
-        return "redirect:/";
     }
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:insert="menu"></div>
+<div>
+    <h3 style="color:red;" th:text="${message}"></h3>
+    <h1>Employees</h1>
+    <a href="/new">Adds a new employee</a>
+    <br/><br/>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Age</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employee : ${employees}">
+            <td th:text="${employee.id}"></td>
+            <td th:text="${employee.name}"></td>
+            <td th:text="${employee.address}"></td>
+            <td th:text="${employee.age}"></td>
+            <td>
+                <a th:href="@{'crud/edit/'+${employee.id}}">Edit</a>&nbsp;&nbsp;&nbsp;
+                <a th:href="@{'crud/delete/'+${employee.id}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

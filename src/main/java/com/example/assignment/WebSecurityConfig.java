@@ -3,6 +3,7 @@ package com.example.assignment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -28,20 +29,20 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         //http.csrf(csrf -> csrf.disable())
         http
-                .authorizeHttpRequests(
-                        auth -> auth
-                                .requestMatchers("/","/passwordtest").anonymous()
-                                .requestMatchers("/resources/**", "/","/home").authenticated()
-                                .requestMatchers("/resources/**", "/","/messages").authenticated()
-                                .requestMatchers("/admin/**").hasRole("ADMIN")
-                                .requestMatchers ("/resources/**", "/", "/register", "/register_process").anonymous()
-                                .requestMatchers ("/resources/**", "/", "/contact").anonymous()
-                                .requestMatchers("/resources/**", "/", "/new").authenticated()
-                                .requestMatchers("/resources/**", "/", "/delete").authenticated()
-                                .requestMatchers("/resources/**", "/", "/edit").authenticated()
-                                .requestMatchers("/resources/**", "/", "/save").authenticated()
-                                .requestMatchers("/resources/**", "/", "/update").authenticated()
-                                .requestMatchers("/", "/persons").anonymous()
+                .authorizeHttpRequests(auth -> auth
+                        // Public (no login required)
+                        .requestMatchers("/", "/home", "/register", "/register_process",
+                                "/contact", "/passwordtest", "/messages/**").permitAll()
+                        .requestMatchers("/resources/**").permitAll()   // static files (best practice)
+
+                        // Admin only
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+
+                        // Logged-in users
+                        .requestMatchers("/crud/**").authenticated()
+
+                        // Everything else requires authentication
+                        .anyRequest().authenticated()
                 )
                 .formLogin(
                         form -> form
