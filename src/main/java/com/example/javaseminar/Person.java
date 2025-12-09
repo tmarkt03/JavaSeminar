@@ -1,22 +1,31 @@
-package com.example.assignment;
+package com.example.javaseminar;
 import jakarta.persistence.*;
-
 @Entity
-@Table(name = "employee")
-public class Employee {
+@Table(name="persons")
+public class Person {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)	// AUTO_INCREMENT
-
-    private Integer id;
+    private Long id;
     private String name;
     private String address;
     private int age;
+    private double weight;
 
-    public Integer getId() {
+    public Person() {
+    }
+
+    public Person(String name, String address, int age, double weight) {
+        this.name = name;
+        this.address = address;
+        this.age = age;
+        this.weight = weight;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -43,4 +52,13 @@ public class Employee {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
 }

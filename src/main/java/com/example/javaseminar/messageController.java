@@ -1,4 +1,4 @@
-package com.example.assignment;
+package com.example.javaseminar;
 
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;

@@ -1,9 +1,10 @@
-package com.example.assignment;
+package com.example.javaseminar;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+
 public class JavaSeminarHomework {
 
 	public static void main(String[] args) {

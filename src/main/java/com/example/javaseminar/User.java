@@ -1,4 +1,4 @@
-package com.example.assignment;
+package com.example.javaseminar;
 
 import jakarta.persistence.*;
 
